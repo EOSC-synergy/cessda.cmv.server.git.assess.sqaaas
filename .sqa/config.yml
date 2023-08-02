@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.cmv.server:
+      branch: main
+      repo: https://github.com/cessda/cessda.cmv.server.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.cmv.server git:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-cinnabar-giraffe.sh
+        container: qc.acc_sleepy-dandelion-moose
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.cmv.server find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-burgundy-eagle.sh
+        container: qc.doc_chewy-pink-armadillo
+      github.com/cessda/cessda.cmv.server git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-lavender-penguin.sh
+        container: qc.doc_pasty-harlequin-oyster
+      github.com/cessda/cessda.cmv.server markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-smalt-macaw.sh
+        container: qc.doc_sunny-carmine-caiman
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.cmv.server licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-wheat-mastiff.sh
+        container: qc.lic_gummy-gamboge-spoonbill
+  QC.Met:
+    repos:
+      github.com/cessda/cessda.cmv.server cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-auburn-greyhound.sh
+        container: qc.met_geeky-malachite-turtle
+  QC.Sty:
+    repos:
+      github.com/cessda/cessda.cmv.server checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-gold-capuchin.sh
+        container: qc.sty_clammy-indigo-liger
+      github.com/cessda/cessda.cmv.server jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-cobalt-warthog.sh
+        container: qc.sty_silly-denim-grouse
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.cmv.server get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-tomato-wolverine.sh
+        container: qc.ver_homey-chartreuse-otter
+timeout: 5400
